@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV - Allegra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rosa-coquette: #f7d7da;
+            --rosa-fuerte: #e5a9b0;
+            --crema: #fffaf0;
+            --dorado: #c5a059;
+            --texto: #4a4a4a;
+        }
+
+        /* --- EFECTO DE INICIO (SPLASH) --- */
+        #splash-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: var(--crema);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-out, visibility 1s;
+        }
+
+        .splash-mono {
+            width: 150px;
+            animation: latido 2s infinite;
+        }
+
+        @keyframes latido {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .btn-ingresar {
+            margin-top: 20px;
+            padding: 15px 40px;
+            background-color: var(--rosa-fuerte);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Libre Baskerville', serif;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Libre Baskerville', serif;
+            background-color: var(--crema);
+            color: var(--texto);
+            text-align: center;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            min-height: 100vh;
+            padding-bottom: 80px; 
+        }
+
+        .hero-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-image: url('portada.jpg');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 5px solid var(--rosa-coquette);
+        }
+
+        .frase-emotiva {
+            padding: 40px 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .coquette-divider {
+            width: 120px; 
+            height: 120px; 
+            margin: 0 auto 30px;
+            display: block;
+            background-image: url('mono.png'); 
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .linea-separadora {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, transparent, var(--dorado), transparent);
+            width: 80%;
+            margin: 40px auto;
+            opacity: 0.5;
+        }
+
+        .countdown-container {
+            background-color: var(--rosa-coquette);
+            padding: 25px 20px; margin: 20px;
+            border-radius: 20px; border: 2px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .countdown-container h3 { font-family: 'Cinzel', serif; color: var(--dorado); letter-spacing: 2px; font-size: 1.1rem; }
+        .countdown { display: flex; justify-content: space-around; }
+        .time-box span { display: block; font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: bold; }
+        .time-box label { font-size: 0.7rem; text-transform: uppercase; color: #777; }
+
+        .btn {
+            display: flex; align-items: center; justify-content: center;
+            margin: 15px auto; padding: 18px 25px; width: 80%;
+            background-color: var(--rosa-fuerte); color: white;
+            text-decoration: none; border-radius: 50px;
+            font-family: 'Libre Baskerville', serif; font-weight: bold; font-size: 0.85rem;
+            letter-spacing: 1px; transition: 0.3s ease;
+            box-shadow: 0 4px 15px rgba(229, 169, 176, 0.4); border: none;
+        }
+
+        .btn::before {
+            content: '';
+            display: inline-block;
+            width: 20px; height: 20px;
+            margin-right: 10px;
+            background-image: url('mono.png'); 
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: brightness(0) invert(1); 
+        }
+
+        .btn:hover { transform: translateY(-2px); background-color: var(--dorado); }
+
+        /* --- ESTILOS DEL MODAL (TARJETA) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--crema);
+            margin: 15% auto;
+            padding: 30px;
+            border: 3px solid var(--rosa-coquette);
+            width: 80%;
+            max-width: 400px;
+            border-radius: 20px;
+            position: relative;
+            animation: aparecer 0.4s ease;
+        }
+
+        @keyframes aparecer {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 25px; font-weight: bold;
+            color: var(--rosa-fuerte); cursor: pointer;
+        }
+
+        .info-seccion { margin: 50px 0; padding: 0 30px; }
+        .info-seccion h3 { font-family: 'Cinzel', serif; color: var(--dorado); font-size: 1.4rem; }
+        .alias-box { background: var(--crema); border: 1px dashed var(--dorado); padding: 15px; margin-top: 10px; }
+
+        .music-player {
+            position: fixed; bottom: 20px; right: 20px;
+            background: white; padding: 10px;
+            border-radius: 50px; display: flex; align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 2px solid var(--rosa-coquette);
+            z-index: 1000;
+        }
+        .music-player span { font-size: 0.7rem; margin: 0 10px; color: var(--rosa-fuerte); font-weight: bold; }
+        .play-btn {
+            background: var(--rosa-fuerte); border: none; width: 35px; height: 35px;
+            border-radius: 50%; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+<div id="splash-screen">
+    <img src="mono.png" class="splash-mono" alt="Moño">
+    <h2 style="font-family: 'Cinzel', serif; color: var(--dorado); margin: 20px 0;">Mis XV Allegra</h2>
+    <button class="btn-ingresar" onclick="ingresar()">INGRESAR</button>
+</div>
+
+<div id="modalTarjeta" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="cerrarTarjeta()">×</span>
+        <img src="mono.png" style="width: 50px; margin-bottom: 10px;">
+        <h3 style="font-family: 'Cinzel', serif; color: var(--dorado);">DETALLES DE TARJETA</h3>
+        <p style="font-weight: bold; font-size: 1.2rem; margin: 15px 0;">Mayores $90.000</p>
+        <p style="font-size: 0.9rem; line-height: 1.6;">
+            Incluye recepción, menú principal, postre<br>bebidas libres, mesa dulce y trasnoche.
+        </p>
+        <p style="font-size: 0.8rem; font-style: italic; color: #777;">Adolescentes de 11 a 16: $70.000</p>
+        <p style="font-size: 0.8rem; font-style: italic; color: #777;">Niños de 04 a 10 años: $65.000</p>
+        <hr class="linea-separadora" style="width: 100%; margin: 15px 0;">
+        <p style="font-size: 0.85rem;">Podés abonar en efectivo o mediante transferencia al alias: m.mussin89<br> Banco Galicia<br> Titular: Maximiliano Oscar Mussin.</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="hero-image"></div>
+
+    <div class="frase-emotiva">
+        "Hay momentos que son mágicos, pero vivirlos con las personas que amas los hace inolvidables. Te espero para compartir la noche que tanto soñé: Mis XV Años."
+    </div>
+
+    <div class="coquette-divider"></div>
+
+    <hr class="linea-separadora">
+
+    <div class="countdown-container">
+        <h3>FALTAN:</h3>
+        <div class="countdown" id="reloj">
+            <div class="time-box"><span id="days">00</span><label>Días</label></div>
+            <div class="time-box"><span id="hours">00</span><label>Hs</label></div>
+            <div class="time-box"><span id="mins">00</span><label>Min</label></div>
+            <div class="time-box"><span id="secs">00</span><label>Seg</label></div>
+        </div>
+    </div>
+
+    <hr class="linea-separadora">
+
+    <div class="info-seccion">
+        <h3>CUÁNDO Y DÓNDE</h3>
+        <p>Sábado, 06 de Febrero de 2027<br>21:30 Hs</p>
+        <p><strong>Arenas Salon De Eventos</strong></p>
+        <a href="https://maps.app.goo.gl/Uj3GeYbaJHuJbTo29" target="_blank" class="btn">VER UBICACIÓN</a>
+    </div>
+
+    <hr class="linea-separadora">
+
+    <div class="info-seccion">
+        <img src="mono.png" style="width: 40px; margin-bottom: 5px;" alt="Moño decorativo">
+        <h3>DRESS CODE</h3>
+        <div style="font-size: 2.5rem; margin: 15px 0;">
+            <span style="margin-right: 20px;">🤵</span>
+            <span>👗</span>
+        </div>
+        <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--texto); padding: 0 20px;">
+            "Solo quiero que vengas a pasarlo bien y a compartir este día tan especial conmigo"
+        </p>
+    </div>
+
+    <hr class="linea-separadora">
+
+    <div class="info-seccion">
+        <h3>MÚSICA</h3>
+        <p>¿Qué canciones no pueden faltar en la fiesta?</p>
+        <div style="font-size: 2.5rem; margin: 10px 0;">🎵</div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScNU7FWlr5EZd1K3KWaVJ8gEqT3KPxYMgZvnPb55aCwvPGZxQ/viewform?usp=publish-editor" target="_blank" class="btn">SUGERIR CANCIÓN</a>
+    </div>
+
+    <hr class="linea-separadora">
+
+    <div class="info-seccion">
+        <h3>TARJETA</h3>
+        <p>Hacé click para ver información.</p>
+        <button onclick="abrirTarjeta()" class="btn" style="cursor:pointer;">TARJETA</button>
+    </div>
+
+    <hr class="linea-separadora">
+
+    <div class="info-seccion">
+        <h3>CONFIRMACIÓN</h3>
+        <p>Confirmá antes del 15 de diciembre.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScyVuoo9h4WyhT_2VN2FW_SnQwbuzWeW5IzXMEuYB770DyWyw/viewform?usp=publish-editor" target="_blank" class="btn">CONFIRMAR ASISTENCIA</a>
+    </div>
+
+    <hr class="linea-separadora">
+
+    <div class="info-seccion">
+        <h3>REGALO</h3>
+        <p>Tu presencia es lo más importante, pero si deseás realizarme un presente, podés hacerlo a mi cuenta:</p>
+        <div class="alias-box">Alias: <strong>allegra.mussin</strong></div>
+        <br><br>
+        <button onclick="copyAlias()" class="btn" style="cursor:pointer; background-color: var(--dorado);">COPIAR ALIAS</button>
+    </div>
+
+    <footer style="padding: 40px 0; opacity: 0.6;">
+        <div class="coquette-divider" style="width: 60px; height: 60px; margin-bottom: 10px;"></div>
+        <p style="font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 3px;">ALLEGRA · XV AÑOS</p>
+    </footer>
+</div>
+
+<div class="music-player">
+    <button class="play-btn" id="playBtn">▶</button>
+    <span id="musicStatus">PONER MÚSICA</span>
+    <audio id="myAudio" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<script>
+    function ingresar() {
+        const splash = document.getElementById('splash-screen');
+        splash.style.opacity = '0';
+        setTimeout(() => {
+            splash.style.visibility = 'hidden';
+        }, 1000);
+    }
+
+    // Funciones de la Tarjeta (Modal)
+    function abrirTarjeta() {
+        document.getElementById("modalTarjeta").style.display = "block";
+    }
+    function cerrarTarjeta() {
+        document.getElementById("modalTarjeta").style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("modalTarjeta")) {
+            cerrarTarjeta();
+        }
+    }
+
+    const eventDate = new Date('February 6, 2027 21:30:00').getTime();
+    setInterval(function() {
+        const now = new Date().getTime();
+        const diff = eventDate - now;
+        if (diff > 0) {
+            document.getElementById("days").innerHTML = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerHTML = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("mins").innerHTML = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("secs").innerHTML = Math.floor((diff % (1000 * 60)) / 1000);
+        }
+    }, 1000);
+
+    const audio = document.getElementById("myAudio");
+    const playBtn = document.getElementById("playBtn");
+    const statusLabel = document.getElementById("musicStatus");
+
+    playBtn.addEventListener("click", function() {
+        if (audio.paused) {
+            audio.play();
+            playBtn.innerHTML = "⏸";
+            statusLabel.innerHTML = "REPRODUCIENDO...";
+        } else {
+            audio.pause();
+            playBtn.innerHTML = "▶";
+            statusLabel.innerHTML = "MÚSICA PAUSADA";
+        }
+    });
+
+    function copyAlias() {
+        navigator.clipboard.writeText("allegra.mussin");
+        alert("¡Alias copiado! Muchas gracias.");
+    }
+</script>
+</body>
+</html>
