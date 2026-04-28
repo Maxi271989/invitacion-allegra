@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis XV - Allegra</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    
     <meta property="og:title" content="¡Estás invitado a mis 15 años! - Allegra">
-<meta property="og:description" content="Te espero para compartir una noche mágica. Entrá para ver los detalles y confirmar asistencia. 🎀">
-<meta property="og:image" content="https://maxi271989.github.io/invitacion-allegra/portada.jpg">
-<meta property="og:url" content="https://maxi271989.github.io/invitacion-allegra/">
-<meta property="og:type" content="website">
+    <meta property="og:description" content="Te espero para compartir una noche mágica. Entrá para ver los detalles y confirmar asistencia. 🎀">
+    <meta property="og:image" content="https://maxi271989.github.io/invitacion-allegra/portada.jpg">
+    <meta property="og:url" content="https://maxi271989.github.io/invitacion-allegra/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
 
-<meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --rosa-coquette: #f7d7da;
@@ -21,7 +22,6 @@
             --texto: #4a4a4a;
         }
 
-        /* --- EFECTO DE INICIO (SPLASH) --- */
         #splash-screen {
             position: fixed;
             top: 0; left: 0;
@@ -148,7 +148,6 @@
 
         .btn:hover { transform: translateY(-2px); background-color: var(--dorado); }
 
-        /* --- ESTILOS DEL MODAL (TARJETA) --- */
         .modal {
             display: none;
             position: fixed;
@@ -161,14 +160,16 @@
 
         .modal-content {
             background-color: var(--crema);
-            margin: 15% auto;
+            margin: 10% auto;
             padding: 30px;
             border: 3px solid var(--rosa-coquette);
-            width: 80%;
+            width: 85%;
             max-width: 400px;
             border-radius: 20px;
             position: relative;
             animation: aparecer 0.4s ease;
+            max-height: 80vh;
+            overflow-y: auto;
         }
 
         @keyframes aparecer {
@@ -214,28 +215,31 @@
         <span class="close-modal" onclick="cerrarTarjeta()">×</span>
         <img src="mono.png" style="width: 50px; margin-bottom: 10px;">
         <h3 style="font-family: 'Cinzel', serif; color: var(--dorado);">DETALLES DE TARJETA</h3>
-        <p style="font-weight: bold; font-size: 1.2rem; margin: 15px 0;">Mayores $90.000</p>
-        <p style="font-size: 0.9rem; line-height: 1.6;">
-            Incluye recepción, menú principal, postre<br>bebidas libres, mesa dulce y trasnoche.
+        <p style="font-weight: bold; font-size: 1.2rem; margin: 10px 0;">Mayores $90.000</p>
+        <p style="font-size: 0.85rem; line-height: 1.5;">
+            Incluye recepción, menú principal, postre,<br>bebidas libres, mesa dulce y trasnoche.
         </p>
-        <p style="font-size: 0.8rem; font-style: italic; color: #777;">Adolescentes de 11 a 16: $70.000</p>
-        <p style="font-size: 0.8rem; font-style: italic; color: #777;">Niños de 04 a 10 años: $65.000</p>
+        <div style="background: rgba(247, 215, 218, 0.3); padding: 10px; border-radius: 10px; margin: 10px 0;">
+            <p style="font-size: 0.8rem; margin: 5px 0;">Adolescentes (11 a 16): $70.000</p>
+            <p style="font-size: 0.8rem; margin: 5px 0;">Niños (4 a 10 años): $65.000</p>
+        </div>
         <hr class="linea-separadora" style="width: 100%; margin: 15px 0;">
-        <p style="font-size: 0.85rem;">Podés abonar en efectivo o mediante transferencia al alias: m.mussin89<br> Banco Galicia<br> Titular: Maximiliano Oscar Mussin.</p>
+        <p style="font-size: 0.85rem; color: var(--texto);">
+            Podés abonar en efectivo o por transferencia:<br>
+            <strong>Alias: m.mussin89</strong><br>
+            Banco Galicia<br>
+            Titular: Maximiliano Oscar Mussin
+        </p>
     </div>
 </div>
 
 <div class="container">
     <div class="hero-image"></div>
-
     <div class="frase-emotiva">
         "Hay momentos que son mágicos, pero vivirlos con las personas que amas los hace inolvidables. Te espero para compartir la noche que tanto soñé: Mis XV Años."
     </div>
-
     <div class="coquette-divider"></div>
-
     <hr class="linea-separadora">
-
     <div class="countdown-container">
         <h3>FALTAN:</h3>
         <div class="countdown" id="reloj">
@@ -245,18 +249,14 @@
             <div class="time-box"><span id="secs">00</span><label>Seg</label></div>
         </div>
     </div>
-
     <hr class="linea-separadora">
-
     <div class="info-seccion">
         <h3>CUÁNDO Y DÓNDE</h3>
-        <p>Sábado, 06 de Febrero de 2027<br>21:15 Hs</p>
+        <p>Sábado, 06 de Febrero de 2027<br>21:30 Hs</p>
         <p><strong>Arenas Salon De Eventos</strong></p>
         <a href="https://maps.app.goo.gl/Uj3GeYbaJHuJbTo29" target="_blank" class="btn">VER UBICACIÓN</a>
     </div>
-
     <hr class="linea-separadora">
-
     <div class="info-seccion">
         <img src="mono.png" style="width: 40px; margin-bottom: 5px;" alt="Moño decorativo">
         <h3>DRESS CODE</h3>
@@ -268,42 +268,33 @@
             "Solo quiero que vengas a pasarlo bien y a compartir este día tan especial conmigo"
         </p>
     </div>
-
     <hr class="linea-separadora">
-
     <div class="info-seccion">
         <h3>MÚSICA</h3>
-        <p>¿Qué canciones no pueden faltar en la fiesta?</p>
+        <p>¿Qué canciones no pueden faltar?</p>
         <div style="font-size: 2.5rem; margin: 10px 0;">🎵</div>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLScNU7FWlr5EZd1K3KWaVJ8gEqT3KPxYMgZvnPb55aCwvPGZxQ/viewform?usp=publish-editor" target="_blank" class="btn">SUGERIR CANCIÓN</a>
     </div>
-
     <hr class="linea-separadora">
-
     <div class="info-seccion">
         <h3>TARJETA</h3>
-        <p>Hacé click para ver información.</p>
-        <button onclick="abrirTarjeta()" class="btn" style="cursor:pointer;">TARJETA</button>
+        <p>Hacé click para ver información de pagos.</p>
+        <button onclick="abrirTarjeta()" class="btn" style="cursor:pointer;">VER TARJETA</button>
     </div>
-
     <hr class="linea-separadora">
-
     <div class="info-seccion">
         <h3>CONFIRMACIÓN</h3>
         <p>Confirmá antes del 15 de diciembre.</p>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLScyVuoo9h4WyhT_2VN2FW_SnQwbuzWeW5IzXMEuYB770DyWyw/viewform?usp=publish-editor" target="_blank" class="btn">CONFIRMAR ASISTENCIA</a>
     </div>
-
     <hr class="linea-separadora">
-
     <div class="info-seccion">
         <h3>REGALO</h3>
-        <p>Tu presencia es lo más importante, pero si deseás realizarme un presente, podés hacerlo a mi cuenta:</p>
+        <p>Si deseás realizarme un presente:</p>
         <div class="alias-box">Alias: <strong>allegra.mussin</strong></div>
         <br><br>
         <button onclick="copyAlias()" class="btn" style="cursor:pointer; background-color: var(--dorado);">COPIAR ALIAS</button>
     </div>
-
     <footer style="padding: 40px 0; opacity: 0.6;">
         <div class="coquette-divider" style="width: 60px; height: 60px; margin-bottom: 10px;"></div>
         <p style="font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 3px;">ALLEGRA · XV AÑOS</p>
@@ -326,20 +317,11 @@
             splash.style.visibility = 'hidden';
         }, 1000);
     }
-
-    // Funciones de la Tarjeta (Modal)
-    function abrirTarjeta() {
-        document.getElementById("modalTarjeta").style.display = "block";
-    }
-    function cerrarTarjeta() {
-        document.getElementById("modalTarjeta").style.display = "none";
-    }
+    function abrirTarjeta() { document.getElementById("modalTarjeta").style.display = "block"; }
+    function cerrarTarjeta() { document.getElementById("modalTarjeta").style.display = "none"; }
     window.onclick = function(event) {
-        if (event.target == document.getElementById("modalTarjeta")) {
-            cerrarTarjeta();
-        }
+        if (event.target == document.getElementById("modalTarjeta")) { cerrarTarjeta(); }
     }
-
     const eventDate = new Date('February 6, 2027 21:30:00').getTime();
     setInterval(function() {
         const now = new Date().getTime();
@@ -351,23 +333,16 @@
             document.getElementById("secs").innerHTML = Math.floor((diff % (1000 * 60)) / 1000);
         }
     }, 1000);
-
     const audio = document.getElementById("myAudio");
     const playBtn = document.getElementById("playBtn");
     const statusLabel = document.getElementById("musicStatus");
-
     playBtn.addEventListener("click", function() {
         if (audio.paused) {
-            audio.play();
-            playBtn.innerHTML = "⏸";
-            statusLabel.innerHTML = "REPRODUCIENDO...";
+            audio.play(); playBtn.innerHTML = "⏸"; statusLabel.innerHTML = "REPRODUCIENDO...";
         } else {
-            audio.pause();
-            playBtn.innerHTML = "▶";
-            statusLabel.innerHTML = "MÚSICA PAUSADA";
+            audio.pause(); playBtn.innerHTML = "▶"; statusLabel.innerHTML = "MÚSICA PAUSADA";
         }
     });
-
     function copyAlias() {
         navigator.clipboard.writeText("allegra.mussin");
         alert("¡Alias copiado! Muchas gracias.");
